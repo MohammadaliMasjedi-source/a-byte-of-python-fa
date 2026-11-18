@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Rebuild the chapter part of reading.html from translation/00..08 and check it.
+"""Rebuild the chapter part of reading.html from the registered drafts and check it.
 
 Usage:
     python3 tools/build_reader.py          # rebuild reading.html
@@ -27,6 +27,7 @@ CHAPTERS = [
     ("06-control-flow.md", "control-flow"),
     ("07-functions.md", "functions"),
     ("08-modules.md", "modules"),
+    ("09-data-structures.md", "data-structures"),
 ]
 FILE_TO_ID = {f: i for f, i in CHAPTERS}
 BEGIN = "<!-- chapters:begin -->"
@@ -204,19 +205,28 @@ class Counter(HTMLParser):
         super().__init__(convert_charrefs=True)
         self.c, self.pre, self.text, self.in_pre, self.ids, self.hrefs = {}, [], [], False, set(), []
         self.cur = ""
+        self.in_toc, self.toc_hrefs, self.h1_ids = False, [], []
 
     def handle_starttag(self, tag, attrs):
         a = dict(attrs)
         if "id" in a:
             self.ids.add(a["id"])
+        if tag == "h1":
+            self.h1_ids.append(a.get("id"))
+        if tag == "nav" and "toc" in a.get("class", "").split():
+            self.in_toc = True
         if tag == "a" and a.get("href", "").startswith("#"):
             self.hrefs.append(a["href"][1:])
+            if self.in_toc:
+                self.toc_hrefs.append(a["href"][1:])
         if tag in ("h1", "h2", "h3", "p", "li", "blockquote", "hr", "pre", "ol"):
             self.c[tag] = self.c.get(tag, 0) + 1
         if tag == "pre":
             self.in_pre, self.cur = True, ""
 
     def handle_endtag(self, tag):
+        if tag == "nav":
+            self.in_toc = False
         if tag == "pre":
             self.in_pre = False
             self.pre.append(self.cur)
@@ -304,8 +314,33 @@ def check():
     sec = page[page.index(BEGIN):page.index(END)]
     chapters = re.split(r"\n  <!-- ={5,} \d+\. [^\n]* =+ -->\n", sec)[1:]
     ok, ids, hrefs = True, set(), []
+    # Compare with the actual draft directory, not just the hand-maintained list.
+    # Otherwise an omitted new chapter (or zip's truncation) can pass unnoticed.
+    translated = sorted(name for name in os.listdir(os.path.join(ROOT, "translation"))
+                        if re.fullmatch(r"\d{2}-.*\.md", name))
+    registered = [fname for fname, _ in CHAPTERS]
+    expected_ids = [hid for _, hid in CHAPTERS]
+    coverage = []
+    if translated != registered:
+        coverage.append("chapter registry must include every translated draft in order: %s" % translated)
+    if len(set(expected_ids)) != len(expected_ids):
+        coverage.append("duplicate chapter IDs in registry")
+    if len(chapters) != len(CHAPTERS):
+        coverage.append("rendered chapter count=%d, registered=%d" % (len(chapters), len(CHAPTERS)))
+    navigation = Counter()
+    navigation.feed(page)
+    if navigation.toc_hrefs != expected_ids:
+        coverage.append("table of contents must link to every chapter once, in order: %s" % expected_ids)
+    missing_chapters = sorted(set(expected_ids) - set(navigation.h1_ids))
+    if missing_chapters:
+        coverage.append("chapter headings missing: %s" % missing_chapters)
+    for problem in coverage:
+        print("coverage:", problem)
+    ok &= not coverage
     print("%-28s %5s %5s %5s %5s %5s %5s  %s" % ("chapter", "h", "p", "li", "ol", "code", "hr", "result"))
-    for (fname, _), chunk in zip(CHAPTERS, chapters):
+    for (fname, hid), chunk in zip(CHAPTERS, chapters):
+        if not os.path.isfile(os.path.join(ROOT, "translation", fname)):
+            continue  # already reported by the directory/registry comparison
         with open(os.path.join(ROOT, "translation", fname), encoding="utf-8") as f:
             md = f.read()
         mc, mcode, mtext = md_counts_and_text(md)
@@ -315,6 +350,8 @@ def check():
         # paragraphs: <p> inside blockquote count once each, like the Markdown paragraphs
         pc = p.c.get("p", 0)
         problems = []
+        if p.h1_ids != [hid]:
+            problems.append("chapter heading ID differs")
         for k in ("h1", "h2", "h3", "li", "hr", "pre", "ol"):
             if mc.get(k, 0) != hc[k]:
                 problems.append("%s md=%d html=%d" % (k, mc.get(k, 0), hc[k]))
