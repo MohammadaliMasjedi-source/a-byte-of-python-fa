@@ -1,7 +1,7 @@
 # TODO
 
 ## اکنون
-- [ ] **بازخوانیِ کاملِ مترجم** روی ده فصلِ ترجمه‌شده (`translation/*.md`) — لحن، روانی، اصطلاحات.
+- [ ] **بازخوانیِ کاملِ مترجم** روی یازده فصلِ ترجمه‌شده (`translation/*.md`) — لحن، روانی، اصطلاحات.
       تا نگذرد، هیچ‌چیز «آماده» نیست.
 - [ ] اصطلاحاتِ فنیِ بیشتر (statement=دستور، string=رشته، …) در واژه‌نامهٔ `TRANSLATORS-NOTE.md` قفل شوند.
 
@@ -11,7 +11,7 @@
 - [x] `functions` — توابع (def / پارامترها / دامنهٔ محلی / global / پیش‌فرض‌ها / کلیدواژه‌ای / VarArgs / return / DocStrings) (ترجمه‌شده ۲۰۲۶-۰۷-۲۲، فصلِ ۷؛ پیش‌نویس) → `translation/07-functions.md`
 - [x] `modules` — ماژول‌ها (sys / .pyc / from..import / `__name__` / ساختِ ماژول / dir / بسته‌ها) (ترجمه‌شده ۲۰۲۶-۰۷-۲۳، فصلِ ۸؛ پیش‌نویس) → `translation/08-modules.md`
 - [x] `data_structures` — ساختارهای داده (list / tuple / dict / set / sequence / references / string methods) (ترجمه‌شده ۲۰۲۶-۰۷-۲۳، فصلِ ۹؛ پیش‌نویس) → `translation/09-data-structures.md`
-- [ ] `problem_solving` — حلِ مسئله (نمونهٔ واقعی)
+- [x] `problem_solving` — حلِ مسئله (۲۰۲۶-۱۱-۲۰؛ پیش‌نویس با کمک هوش مصنوعی، بازخوانیِ انسانی در انتظار) → `translation/10-problem-solving.md`
 - [ ] `oop` — برنامه‌نویسیِ شیءگرا
 - [ ] `io` — ورودی/خروجی و فایل‌ها
 - [ ] `exceptions` — استثناها
