@@ -1,7 +1,7 @@
 # یک بایت پایتون به فارسی (A Byte of Python, Persian)
 
 Draft Persian translation of the free book "A Byte of Python" by Swaroop C H.
-Chapters 00 to 09 (preface to data structures) are translated; the rest of the book is not.
+Chapters 00 to 10 (preface to problem solving) are translated as drafts; the rest of the book is not.
 Text is CC BY-SA 4.0, code is BSD-3-Clause; AI-assisted draft, human review pending.
 
 ترجمهٔ فارسیِ کتابِ آزادِ **A Byte of Python** نوشتهٔ **Swaroop C H** — یک راهنمای مقدماتیِ پایتون برای تازه‌کارها.
@@ -26,13 +26,13 @@ Text is CC BY-SA 4.0, code is BSD-3-Clause; AI-assisted draft, human review pend
 
 ## وضعیتِ صادقانه
 
-- ✅ **فصل‌های ۰۰ تا ۰۹** (ده فصل؛ «تقدیم‌نامه» ترجمه نشده است) به‌صورتِ **پیش‌نویس** ترجمه شده‌اند:
+- ✅ **فصل‌های ۰۰ تا ۱۰** (یازده فصل؛ «تقدیم‌نامه» ترجمه نشده است) به‌صورتِ **پیش‌نویس** ترجمه شده‌اند:
   پیش‌گفتار، دربارهٔ پایتون، نصب، نخستین گام‌ها، پایه‌ها (متغیرها/نوع‌ها)، عملگرها و عبارت‌ها،
-  جریانِ کنترل، توابع، ماژول‌ها، ساختارهای داده.
+  جریانِ کنترل، توابع، ماژول‌ها، ساختارهای داده و حلِ مسئله.
 - ⚠️ همهٔ فصل‌ها با برچسبِ «**پیش‌نویس — نیازمندِ بازخوانیِ نهاییِ مترجم**» علامت‌گذاری شده‌اند.
-- ⬜ باقیِ کتاب (حلِ مسئله، برنامه‌نویسیِ شیءگرا، ورودی/خروجی، استثناها، کتابخانهٔ استاندارد، نکاتِ بیشتر، بعد از این چه؟)
+- ⬜ باقیِ کتاب (برنامه‌نویسیِ شیءگرا، ورودی/خروجی، استثناها، کتابخانهٔ استاندارد، نکاتِ بیشتر، بعد از این چه؟)
   **هنوز ترجمه نشده است**.
-- `reading.html` (خوانندهٔ آفلاین) فقط فصل‌های **۰۰ تا ۰۸** را دارد. فصلِ ۰۹ فقط در `translation/09-data-structures.md` است.
+- `reading.html` (خوانندهٔ آفلاین) فقط فصل‌های **۰۰ تا ۰۸** را دارد. فصل‌های ۰۹ و ۱۰ فعلاً در فایل‌های Markdown پوشهٔ `translation/` هستند؛ گسترشِ خواننده در T-BOP-03 پیگیری می‌شود.
 
 ---
 
@@ -61,7 +61,8 @@ translation/           # فصل‌های ترجمه‌شده (Markdown، فار�
 ├─ 06-control-flow.md
 ├─ 07-functions.md
 ├─ 08-modules.md
-└─ 09-data-structures.md
+├─ 09-data-structures.md
+└─ 10-problem-solving.md
 reading.html           # خوانندهٔ آفلاین (فصل‌های 00 تا 08)، RTL + کدِ LTR
 tools/build_reader.py   # ساخت و بررسیِ reading.html از روی فصل‌های Markdown
 LICENSE                # CC BY-SA 4.0، متنِ حقوقیِ کامل

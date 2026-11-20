@@ -52,7 +52,7 @@ translated files, and each change is in the translation:
 
 7. Code blocks stay in English and are not changed. The REPL blocks and the error block are fenced
    as `pycon` and `text` for syntax highlighting; the content is the same.
-8. Chapter files are numbered `00` to `09` and named in English. Links between chapters point to
+8. Chapter files are numbered `00` to `10` and named in English. Links between chapters point to
    these files; links to chapters that are not translated yet (object oriented programming,
    standard library) are plain text. The `{#id}` heading markers of the upstream build are not used;
    in-page links use the automatic heading anchors.
@@ -64,6 +64,23 @@ translated files, and each change is in the translation:
     `reading.html`, which covers chapters 00 to 08.
 
 ## Glossary (one Persian term per concept)
+
+### Chapter 10 — 20 November 2026
+
+The AI-assisted problem-solving draft follows upstream commit
+`84f4dd8d6f09836fa58226eaafe922b8a7baabc6` (chapter blob
+`ee1613e1988163a3ee0b4c145da35b6c28d9c144`). All four Python examples and
+their four printed outputs are embedded from that source, including the
+intentional syntax error in version 3. No backup commands were executed.
+The installation cross-link points to our translated chapter; source-era
+GnuWin32 URLs remain unchanged and are not a fresh tool recommendation.
+This chapter has not received final human Persian or teaching review.
+It is not yet part of the offline reader; T-BOP-03 is a separate task.
+
+Terms used for review: backup = نسخهٔ پشتیبان; archive = بایگانی;
+debugging = اشکال‌زدایی; deployment = استقرار; operand = عملوند;
+logical/physical line = سطرِ منطقی/فیزیکی. Please review «بهره‌برداری» for
+operation and «دنبالهٔ گریز» for escape sequence against the earlier drafts.
 
 | English | Persian |
 |---|---|
@@ -87,6 +104,6 @@ translated files, and each change is in the translation:
 
 ## Status
 
-- Chapters 00 to 09 are translated as a draft (the Dedication is not translated).
-- Not translated yet: problem solving, object oriented programming, input and output, exceptions,
+- Chapters 00 to 10 are translated as drafts (the Dedication is not translated).
+- Not translated yet: object oriented programming, input and output, exceptions,
   standard library, more, what next.
