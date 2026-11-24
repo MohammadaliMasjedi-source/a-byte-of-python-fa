@@ -19,7 +19,7 @@ translated files, and each change is in the translation:
   paragraphs, code blocks), all code and program output, inline code, and links. Code blocks and
   program outputs of chapters 02 to 09 are identical to upstream apart from the language tag of the
   fence (see below). The prose was sampled, not proofread by a human. Human review is pending.
-- `reading.html` is generated from the Markdown chapters 00 to 08 by `tools/build_reader.py`.
+- `reading.html` is generated from the Markdown chapters 00 to 10 by `tools/build_reader.py`.
   `python3 tools/build_reader.py --check` compares headings, paragraphs, list items and code blocks
   of every chapter, the code text, and the prose text with the Markdown, and checks that internal
   anchors resolve.
@@ -60,8 +60,7 @@ translated files, and each change is in the translation:
    in the paragraph about the official website and the paper book.
 10. Dead upstream links, kept as they are in upstream: the Google jobs page (`01-about-python.md`)
    and the Docker on Windows page (`02-installation.md`).
-11. Chapter 9 (data structures) is in `translation/09-data-structures.md` but is not in
-    `reading.html`, which covers chapters 00 to 08.
+11. The combined offline preview includes chapters 09 and 10, with the existing draft warnings.
 
 ## Glossary (one Persian term per concept)
 
@@ -75,7 +74,7 @@ intentional syntax error in version 3. No backup commands were executed.
 The installation cross-link points to our translated chapter; source-era
 GnuWin32 URLs remain unchanged and are not a fresh tool recommendation.
 This chapter has not received final human Persian or teaching review.
-It is not yet part of the offline reader; T-BOP-03 is a separate task.
+The combined offline preview includes it. The source draft remains pending Persian and teaching review.
 
 Terms used for review: backup = نسخهٔ پشتیبان; archive = بایگانی;
 debugging = اشکال‌زدایی; deployment = استقرار; operand = عملوند;
