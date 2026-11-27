@@ -20,7 +20,10 @@ In the PR body, list any term you were unsure about — that honesty speeds the 
 ### T-BOP-01 · Translate chapter 9: Data Structures [phase: translate · size: M · status: DONE]
 **Done:** `translation/09-data-structures.md` exists and its `TODO.md` line is ticked. Kept for reference.
 
-### T-BOP-02 · Translate chapter 10: Problem Solving [phase: translate · size: M · status: OPEN]
+### T-BOP-02 · Translate chapter 10: Problem Solving [phase: translate · size: M · status: CLAIMED]
+**Draft PR:** [#2](https://github.com/MohammadaliMasjedi-source/a-byte-of-python-fa/pull/2)
+— AI-assisted chapter draft and source-parity checks prepared on 20 November 2026.
+Human Persian/teaching review and merge remain open; this task is not DONE.
 **Context:** read `translation/06-control-flow.md` and `translation/07-functions.md`, the glossary in
 `TRANSLATORS-NOTE.md`, `TODO.md`, and the original `problem_solving` chapter (the backup-script worked
 example) of *A Byte of Python* (python.swaroopch.com). Chapters go in order; chapter 9 is done.
