@@ -8,3 +8,8 @@ The bilingual app and its English and Persian companion pages build from `cards.
 4. Download/open `labs/python-pocket-lab.html`, disconnect, switch languages mid-round, and check the explanation and final score. Previews of HTML source on github.com do not execute it; the two Markdown editions work directly on GitHub.
 
 Bug reports are useful even without a code change: include the question ID, selected language, expected/observed output, and browser or Python version. Do not include personal details or browser storage dumps.
+
+
+For an illustrated puzzle, add a relative `diagram` under `labs/diagrams/`, a bilingual text alternative (`alt`), a common wrong prediction (`misconception`), and a second executable snippet (`variant`) whose result is the other choice (`variant_answer`). The four illustrated puzzles in `cards.json` are worked examples. The SVG is embedded in the offline game; no image host is required. Original Persian feedback for the first eight cards lives in `classic.fa.md`.
+
+Run `python3 -m unittest discover -s tests` to compare every snippet and alternate with its advertised output. Only run contributor code after reviewing it.

@@ -262,5 +262,169 @@
       "At these exactly representable ties, round chooses the even integer. That differs from rounding every half upward."
     ],
     "ref": "https://docs.python.org/3/library/functions.html#round"
+  },
+  {
+    "id": "shared-rows",
+    "topic": [
+      "ارجاع مشترک",
+      "Shared references"
+    ],
+    "title": [
+      "یک خانه را عوض کن؛ موقع چاپ چه می‌بینی؟",
+      "One write to a grid. What will you read back?"
+    ],
+    "code": "grid = [[0, 0]] * 3\ngrid[0][1] = 7\nprint([row[1] for row in grid])",
+    "options": [
+      "[7, 0, 0]",
+      "[7, 7, 7]"
+    ],
+    "answer": 1,
+    "why": [
+      "ضرب در سه، سه خانه در فهرست بیرونی می‌سازد؛ اما هر سه خانه به همان فهرست درونی اشاره می‌کنند. پس وقتی خانهٔ دومِ یک ردیف را تغییر می‌دهی، هر سه بار همان خانه را می‌خوانی.",
+      "Multiplication creates three slots in the outer list, all pointing to the same inner list. The assignment changes one inner slot; the final loop reads that same slot three times."
+    ],
+    "misconception": [
+      "جواب [7, 0, 0] وقتی درست بود که برای هر ردیف، یک فهرست جدا ساخته بودیم.",
+      "The answer [7, 0, 0] would require three independently created row lists."
+    ],
+    "alt": [
+      "سه پیکان از grid[0]، grid[1] و grid[2] به یک ردیف می‌رسند. خانهٔ دوم آن ردیف ۷ است.",
+      "Three arrows from grid[0], grid[1], and grid[2] converge on one row. Its second slot now holds 7."
+    ],
+    "diagram": "diagrams/shared-rows.svg",
+    "ref": "https://docs.python.org/3/faq/programming.html#how-do-i-create-a-multidimensional-list",
+    "source_label": [
+      "ساختن فهرست چندبعدی",
+      "Python FAQ: multidimensional lists"
+    ],
+    "experiment": [
+      "سطر اول را به grid = [[0, 0] for _ in range(3)] تغییر بده. حالا چند پیکان باید بکشی؟",
+      "Replace the first line with grid = [[0, 0] for _ in range(3)]. Where should the arrows point now?"
+    ],
+    "variant": "grid = [[0, 0] for _ in range(3)]\ngrid[0][1] = 7\nprint([row[1] for row in grid])",
+    "variant_answer": 0
+  },
+  {
+    "id": "one-way-stream",
+    "topic": [
+      "دادهٔ جریانی",
+      "Streams"
+    ],
+    "title": [
+      "بار دوم چه چیزی از ملودی مانده؟",
+      "What is left of the melody on a second pass?"
+    ],
+    "code": "notes = iter([\"A\", \"B\", \"C\"])\nnext(notes)\nlist(notes)\nprint(list(notes))",
+    "options": [
+      "[]",
+      "['B', 'C']"
+    ],
+    "answer": 0,
+    "why": [
+      "next نت اول را مصرف می‌کند. فراخوانی بعدیِ list هر دو نت باقی‌مانده را می‌خواند؛ دور ریختن نتیجه، آن دو نت را برنمی‌گرداند. پس موقع چاپ، پیمایشگر به آخر رسیده است.",
+      "next consumes A. The first list call consumes B and C; discarding its return value does not rewind the iterator. At print time there is nothing left."
+    ],
+    "misconception": [
+      "اگر پیمایشگر را مثل فهرست ببینی، انتظار داری هر بار از اول بخواند. پیمایشگر جای خواندن را جلو می‌برد.",
+      "A list can be iterated from the start again; this iterator keeps advancing from its current position."
+    ],
+    "alt": [
+      "در سه مرحله، خروجی‌های A، سپس B و C، و در پایان فهرست خالی به دست می‌آیند.",
+      "The sequence of return values is A, then [B, C], then an empty list."
+    ],
+    "diagram": "diagrams/one-way-stream.svg",
+    "ref": "https://docs.python.org/3/library/stdtypes.html#iterator-types",
+    "source_label": [
+      "پیمایشگرها",
+      "Python: iterator types"
+    ],
+    "experiment": [
+      "فقط سطر سوم را حذف کن. پیش از اجرا بگو کدام دو نت چاپ می‌شوند.",
+      "Remove only the third line. Which two notes will print?"
+    ],
+    "variant": "notes = iter([\"A\", \"B\", \"C\"])\nnext(notes)\nprint(list(notes))",
+    "variant_answer": 1
+  },
+  {
+    "id": "late-buttons",
+    "topic": [
+      "توابع و زمان اجرا",
+      "Closures"
+    ],
+    "title": [
+      "سه دکمه، سه بار کلیک؛ چه عددهایی می‌شنوی؟",
+      "Three callbacks, three clicks. Which numbers appear?"
+    ],
+    "code": "def make_buttons():\n    return [lambda: n for n in (1, 2, 3)]\n\nbuttons = make_buttons()\nprint([click() for click in buttons])",
+    "options": [
+      "[1, 2, 3]",
+      "[3, 3, 3]"
+    ],
+    "answer": 1,
+    "why": [
+      "وقتی دکمه‌ها ساخته می‌شوند، بدنهٔ lambda اجرا نمی‌شود. هر سه تابع نام n را از همان محدوده می‌خوانند. تا وقتی روی دکمه‌ها «کلیک» می‌کنیم، حلقه تمام شده و مقدار n برابر ۳ است.",
+      "Building the callbacks does not execute their bodies. All three read the same enclosing binding for n. By the time we call them, the loop has finished with n equal to 3."
+    ],
+    "misconception": [
+      "ساختن تابع با عکس‌گرفتن از مقدار متغیر فرق دارد. در این مثال مقدار در زمان فراخوانی خوانده می‌شود.",
+      "Creating a function is not a snapshot of the variable’s value. Here the value is looked up when the function runs."
+    ],
+    "alt": [
+      "سه دکمه به یک نام مشترک اشاره می‌کنند. پس از حلقه آن نام مقدار ۳ دارد.",
+      "Three callback arrows point to one shared binding, whose final value after the loop is 3."
+    ],
+    "diagram": "diagrams/late-buttons.svg",
+    "ref": "https://docs.python.org/3/faq/programming.html#why-do-lambdas-defined-in-a-loop-with-different-values-all-return-the-same-result",
+    "source_label": [
+      "توابع ساخته‌شده در حلقه",
+      "Python FAQ: lambdas in loops"
+    ],
+    "experiment": [
+      "به‌جای lambda: n بنویس lambda n=n: n. این بار مقدار پیش‌فرض هر تابع چه زمانی تعیین می‌شود؟",
+      "Replace lambda: n with lambda n=n: n. When does each function get its default value?"
+    ],
+    "variant": "def make_buttons():\n    return [lambda n=n: n for n in (1, 2, 3)]\n\nbuttons = make_buttons()\nprint([click() for click in buttons])",
+    "variant_answer": 0
+  },
+  {
+    "id": "stable-ties",
+    "topic": [
+      "ترتیب و تساوی",
+      "Stable sorting"
+    ],
+    "title": [
+      "دو نمونه هم‌امتیازند؛ کدام جلو می‌افتد؟",
+      "Two samples tie. Which one comes first?"
+    ],
+    "code": "samples = [(\"C\", 8), (\"A\", 6), (\"B\", 8)]\nranked = sorted(samples, key=lambda s: s[1],\n                reverse=True)\nprint(\" \".join(name for name, score in ranked))",
+    "options": [
+      "C B A",
+      "B C A"
+    ],
+    "answer": 0,
+    "why": [
+      "کلید مرتب‌سازی فقط امتیاز است. C و B امتیاز یکسان دارند و مرتب‌سازی پایدار ترتیب اولیهٔ آن‌ها را حفظ می‌کند؛ حتی وقتی reverse=True باشد. A چون امتیاز ۶ دارد بعد از هر دو می‌آید.",
+      "Only the score is used as the key. C and B tie at 8, so a stable sort retains their original order even with reverse=True. A scores 6 and follows both."
+    ],
+    "misconception": [
+      "reverse=True به معنی «اول صعودی مرتب کن، سپس کل خروجی را از آخر بخوان» نیست؛ آن روش ترتیب اعضای مساوی را هم برعکس می‌کند.",
+      "A descending stable sort is not “sort ascending, then reverse the entire list.” That alternative would reverse the tied pair too."
+    ],
+    "alt": [
+      "پیکان‌های ردیف‌ها نشان می‌دهند که C و B با امتیاز ۸ در خروجی هم به همان ترتیب می‌آیند و A با امتیاز ۶ به آخر می‌رود.",
+      "Arrows trace C/8 and B/8 to the first two output slots in original order. A/6 moves to the last slot."
+    ],
+    "diagram": "diagrams/stable-ties.svg",
+    "ref": "https://docs.python.org/3/howto/sorting.html#sort-stability-and-complex-sorts",
+    "source_label": [
+      "پایداری مرتب‌سازی",
+      "Python: sort stability"
+    ],
+    "experiment": [
+      "جای B و C را فقط در فهرست ورودی عوض کن. هنوز کدام بخش قانون ثابت می‌ماند؟",
+      "Swap only B and C in the input. Which part of the ordering rule stays the same?"
+    ],
+    "variant": "samples = [(\"B\", 8), (\"A\", 6), (\"C\", 8)]\nranked = sorted(samples, key=lambda s: s[1],\n                reverse=True)\nprint(\" \".join(name for name, score in ranked))",
+    "variant_answer": 1
   }
 ]
