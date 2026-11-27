@@ -16,6 +16,10 @@ Text is CC BY-SA 4.0, code is BSD-3-Clause; AI-assisted draft, human review pend
 
 ## پنج دقیقه پایتون را امتحان کن
 
+**[دفتر حدس‌ها: دریافت بازی آفلاین فارسی و انگلیسی](https://github.com/MohammadaliMasjedi-source/a-byte-of-python-fa/raw/refs/heads/main/labs/python-pocket-lab.html)** — فایل HTML را ذخیره کن و با مرورگر باز کن. ۱۲ معمای امتیازدار، از یونیکد و فوکوس دوربین تا ریتم و گیتار.
+
+**Play here on GitHub:** [12 English puzzles](labs/PLAY.en.md) · [هشت معمای فارسی](labs/PLAY.md) · [چهار معمای تکمیلی فارسی](labs/ENCORE.fa.md). No account required. For scoring and offline use, download the standalone game above.
+
 [**همین‌جا بازی کن: هشت حدس پایتونی**](labs/PLAY.md) · [نسخهٔ قابل اجرا و منابع](labs/README.md): چرا دو «آ» که یکسان دیده می‌شوند برابر نیستند؟ اگر دو عکس بهترین امتیاز فوکوس را داشته باشند کدام برنده می‌شود؟ این بخش مکملِ فارسیِ مخزن است. برای شروعِ خودِ کتاب به [نخستین گام‌ها](translation/03-first-steps.md) برو.
 
 ## ترجمهٔ کاملِ دیگر

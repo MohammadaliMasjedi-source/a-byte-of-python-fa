@@ -202,6 +202,8 @@ print(int("۰۷") + 1)
 
 [لینک همین سؤال](https://github.com/MohammadaliMasjedi-source/a-byte-of-python-fa/blob/main/labs/PLAY.md#q8)
 
+[ادامهٔ بازی: چهار معمای ریتم، گیتار، تست نرم‌افزار و اندازه‌گیری](ENCORE.fa.md) · [Play in English](PLAY.en.md)
+
 **چند تا را بار اول درست گفتی؟** برای هر حدس اشتباه یک چیز را در کد عوض کن تا جوابِ دیگرت درست از آب دربیاید. مثلاً در سؤال سوم فقط `.copy()` را بردار.
 
 [اجرای همین ایده‌ها با پایتون و دیدن منابع](README.md) · [آزمایش فوکوس بدون دوربین](https://github.com/MohammadaliMasjedi-source/rpi-camera-af/blob/main/examples/focus_scores.py) · [یک معمای تازه پیشنهاد بده](https://github.com/MohammadaliMasjedi-source/a-byte-of-python-fa/issues) · [پروفایل سازنده](https://github.com/MohammadaliMasjedi-source)

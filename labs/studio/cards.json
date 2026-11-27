@@ -1,0 +1,266 @@
+[
+  {
+    "id": "q1",
+    "topic": [
+      "متن",
+      "Text"
+    ],
+    "title": [
+      "یک حرف، چند بایت؟",
+      "One letter. How many bytes?"
+    ],
+    "code": "print(len(\"آ\".encode(\"utf-8\")))",
+    "options": [
+      "1",
+      "2"
+    ],
+    "answer": 1,
+    "why": [
+      "UTF-8 برای این حرف دو بایت لازم دارد.",
+      "UTF-8 uses two bytes for this letter. One is the number of Unicode code points before encoding."
+    ],
+    "ref": "https://docs.python.org/3/library/stdtypes.html#str.encode"
+  },
+  {
+    "id": "q2",
+    "topic": [
+      "متن",
+      "Text"
+    ],
+    "title": [
+      "یک شکل، دو رشته؟",
+      "Two strings, one shape?"
+    ],
+    "code": "print(\"آ\" == \"ا\" + \"\\u0653\")",
+    "options": [
+      "False",
+      "True"
+    ],
+    "answer": 0,
+    "why": [
+      "نمایش یکسان می‌تواند از دو توالی متفاوت یونیکد ساخته شود.",
+      "The first string contains one code point. The second contains an alef and a combining mark. They can look alike without comparing equal."
+    ],
+    "ref": "https://docs.python.org/3/library/unicodedata.html#unicodedata.normalize"
+  },
+  {
+    "id": "q3",
+    "topic": [
+      "فهرست",
+      "Lists"
+    ],
+    "title": [
+      "چند درس در نسخهٔ قدیمی ماند؟",
+      "What stayed in the old lesson list?"
+    ],
+    "code": "lessons = [\"نور\"]\nold = lessons.copy()\nlessons.append(\"صدا\")\nprint(len(old))",
+    "options": [
+      "2",
+      "1"
+    ],
+    "answer": 1,
+    "why": [
+      "کپی پیش از اضافه‌شدن «صدا» ساخته شده است.",
+      "The shallow copy was made before the second lesson was appended. Plain assignment would have kept both names pointing to the same list."
+    ],
+    "ref": "https://docs.python.org/3/tutorial/datastructures.html#more-on-lists"
+  },
+  {
+    "id": "q4",
+    "topic": [
+      "فهرست",
+      "Lists"
+    ],
+    "title": [
+      "مرتب شد؛ ولی چه چیزی برگشت؟",
+      "The list is sorted. What did sort return?"
+    ],
+    "code": "scores = [8, 2, 5]\nprint(scores.sort())",
+    "options": [
+      "[2, 5, 8]",
+      "None"
+    ],
+    "answer": 1,
+    "why": [
+      "خود فهرست مرتب شد. متد sort مقدار تازه‌ای برنمی‌گرداند.",
+      "sort() changes the list in place and returns None. To see the sorted values, print the list afterwards."
+    ],
+    "ref": "https://docs.python.org/3/tutorial/datastructures.html#more-on-lists"
+  },
+  {
+    "id": "q5",
+    "topic": [
+      "دوربین",
+      "Camera"
+    ],
+    "title": [
+      "کدام عکس در تساوی برنده است؟",
+      "Two frames tie. Which index wins?"
+    ],
+    "code": "scores = [12, 19, 19, 10]\nprint(max(range(len(scores)), key=scores.__getitem__))",
+    "options": [
+      "1",
+      "2"
+    ],
+    "answer": 0,
+    "why": [
+      "هر دو عکس امتیاز ۱۹ دارند؛ max اولین بیشینه را نگه می‌دارد.",
+      "max keeps the first maximum. Both scores are 19, but index 1 comes first."
+    ],
+    "ref": "https://docs.python.org/3/library/functions.html#max"
+  },
+  {
+    "id": "q6",
+    "topic": [
+      "دوربین",
+      "Camera"
+    ],
+    "title": [
+      "برای سه عکس و دو برچسب چند جفت داریم؟",
+      "Three photos, two labels. How many pairs?"
+    ],
+    "code": "print(len(list(zip([\"a\", \"b\", \"c\"], [10, 12]))))",
+    "options": [
+      "2",
+      "3"
+    ],
+    "answer": 0,
+    "why": [
+      "با تمام‌شدن برچسب‌ها، zip عادی متوقف می‌شود.",
+      "Ordinary zip stops when the shorter input runs out. It does not invent a label for the last photo."
+    ],
+    "ref": "https://docs.python.org/3/library/functions.html#zip"
+  },
+  {
+    "id": "q7",
+    "topic": [
+      "حسگر",
+      "Sensors"
+    ],
+    "title": [
+      "آیا اندازه‌گیری انجام شده؟",
+      "Did the sensor record anything?"
+    ],
+    "code": "readings = [0, 0]\nprint(bool(readings), any(readings))",
+    "options": [
+      "False False",
+      "True False"
+    ],
+    "answer": 1,
+    "why": [
+      "فهرست خالی نیست، اما هیچ عضوی مقدارِ درست ندارد.",
+      "A list with two zeroes is nonempty, so its truth value is True. Neither reading is truthy, so any returns False."
+    ],
+    "ref": "https://docs.python.org/3/library/stdtypes.html#truth-value-testing"
+  },
+  {
+    "id": "q8",
+    "topic": [
+      "متن",
+      "Text"
+    ],
+    "title": [
+      "صفرِ اول کجا رفت؟",
+      "Where did the leading zero go?"
+    ],
+    "code": "print(int(\"۰۷\") + 1)",
+    "options": [
+      "8",
+      "۰۸"
+    ],
+    "answer": 0,
+    "why": [
+      "رقم‌ها برای محاسبه به عدد تبدیل شده‌اند؛ صفر اول جزو مقدار عدد نیست.",
+      "int accepts decimal digits written in Persian. The integer retains neither the spelling nor the leading zero."
+    ],
+    "ref": "https://docs.python.org/3/library/functions.html#int"
+  },
+  {
+    "id": "music",
+    "topic": [
+      "موسیقی",
+      "Music"
+    ],
+    "title": [
+      "ضرب هفتم کجای ریتم می‌افتد؟",
+      "Where does beat seven land?"
+    ],
+    "code": "from itertools import cycle, islice\nbar = cycle([\"DUM\", \"tak\", \"tak\"])\nprint(next(islice(bar, 6, None)))",
+    "options": [
+      "tak",
+      "DUM"
+    ],
+    "answer": 1,
+    "why": [
+      "شش ضرب، دو دور کامل است. پس ضرب هفتم دوباره صدای اول است.",
+      "Six beats make two whole bars of three. Skipping them puts us back on the first sound."
+    ],
+    "ref": "https://docs.python.org/3/library/itertools.html#itertools.cycle"
+  },
+  {
+    "id": "pitch",
+    "topic": [
+      "گیتار",
+      "Guitar"
+    ],
+    "title": [
+      "یک نیم‌پرده زیرِ نت مرجع، در کدام اکتاو است؟",
+      "One semitone below the reference: which octave?"
+    ],
+    "code": "semitones = -1\nprint(semitones // 12, semitones % 12)",
+    "options": [
+      "-1 11",
+      "0 -1"
+    ],
+    "answer": 0,
+    "why": [
+      "تقسیم صحیح به سمت منفی بی‌نهایت گرد می‌کند: منفی یک برابر است با ۱۲ ضرب‌در منفی یک، به‌علاوهٔ ۱۱.",
+      "Floor division rounds down. The octave is −1 and the position inside that octave is 11: −1 = 12 × (−1) + 11."
+    ],
+    "ref": "https://docs.python.org/3/reference/expressions.html#binary-arithmetic-operations"
+  },
+  {
+    "id": "qa",
+    "topic": [
+      "تست نرم‌افزار",
+      "Software QA"
+    ],
+    "title": [
+      "کدام آزمایش اول رد شد؟",
+      "Which check failed first?"
+    ],
+    "code": "passed = [True, False, False]\nprint(next(n for n, ok in enumerate(passed, 1) if not ok))",
+    "options": [
+      "1",
+      "2"
+    ],
+    "answer": 1,
+    "why": [
+      "شماره‌گذاری این بار از یک شروع می‌شود. next فقط اولین نتیجه‌ای را می‌گیرد که False بوده است.",
+      "Numbering explicitly starts at one. next takes just the first failed check."
+    ],
+    "ref": "https://docs.python.org/3/library/functions.html#enumerate"
+  },
+  {
+    "id": "meter",
+    "topic": [
+      "اندازه‌گیری",
+      "Measurement"
+    ],
+    "title": [
+      "دو عدد نیمه‌صحیح چطور گرد می‌شوند؟",
+      "What happens at two exact ties?"
+    ],
+    "code": "print(round(2.5), round(3.5))",
+    "options": [
+      "2 4",
+      "3 4"
+    ],
+    "answer": 0,
+    "why": [
+      "در این دو مقدارِ دقیقاً نیمه، round عدد زوج نزدیک‌تر را انتخاب می‌کند. این با «همیشه نیم را به بالا گرد کن» فرق دارد.",
+      "At these exactly representable ties, round chooses the even integer. That differs from rounding every half upward."
+    ],
+    "ref": "https://docs.python.org/3/library/functions.html#round"
+  }
+]
