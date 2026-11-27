@@ -19,10 +19,11 @@ translated files, and each change is in the translation:
   paragraphs, code blocks), all code and program output, inline code, and links. Code blocks and
   program outputs of chapters 02 to 09 are identical to upstream apart from the language tag of the
   fence (see below). The prose was sampled, not proofread by a human. Human review is pending.
-- `reading.html` is generated from the Markdown chapters 00 to 08 by `tools/build_reader.py`.
+- `reading.html` is generated from the Markdown chapters 00 to 09 by `tools/build_reader.py`.
   `python3 tools/build_reader.py --check` compares headings, paragraphs, list items and code blocks
   of every chapter, the code text, and the prose text with the Markdown, and checks that internal
-  anchors resolve.
+  anchors resolve. It also checks that every translated draft is registered and reachable
+  once from the table of contents, in chapter order.
 
 ## Adaptations
 
@@ -60,8 +61,8 @@ translated files, and each change is in the translation:
    in the paragraph about the official website and the paper book.
 10. Dead upstream links, kept as they are in upstream: the Google jobs page (`01-about-python.md`)
    and the Docker on Windows page (`02-installation.md`).
-11. Chapter 9 (data structures) is in `translation/09-data-structures.md` but is not in
-    `reading.html`, which covers chapters 00 to 08.
+11. Chapter 9 (data structures) is included in `reading.html` from
+    `translation/09-data-structures.md`. The reader covers chapters 00 to 09, all still drafts.
 
 ## Glossary (one Persian term per concept)
 

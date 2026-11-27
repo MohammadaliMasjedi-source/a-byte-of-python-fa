@@ -42,7 +42,7 @@ Save the HTML and open it in your browser. Both languages, diagrams and explanat
 - ⚠️ همهٔ فصل‌ها با برچسبِ «**پیش‌نویس — نیازمندِ بازخوانیِ نهاییِ مترجم**» علامت‌گذاری شده‌اند.
 - ⬜ باقیِ کتاب (حلِ مسئله، برنامه‌نویسیِ شیءگرا، ورودی/خروجی، استثناها، کتابخانهٔ استاندارد، نکاتِ بیشتر، بعد از این چه؟)
   **هنوز ترجمه نشده است**.
-- `reading.html` (خوانندهٔ آفلاین) فقط فصل‌های **۰۰ تا ۰۸** را دارد. فصلِ ۰۹ فقط در `translation/09-data-structures.md` است.
+- `reading.html` (خوانندهٔ آفلاین) همهٔ ده فصلِ پیش‌نویس، **۰۰ تا ۰۹**، را دارد؛ هر فصل از فهرست در دسترس است.
 
 ---
 
@@ -72,7 +72,7 @@ translation/           # فصل‌های ترجمه‌شده (Markdown، فار�
 ├─ 07-functions.md
 ├─ 08-modules.md
 └─ 09-data-structures.md
-reading.html           # خوانندهٔ آفلاین (فصل‌های 00 تا 08)، RTL + کدِ LTR
+reading.html           # خوانندهٔ آفلاین (فصل‌های 00 تا 09، پیش‌نویس)، RTL + کدِ LTR
 tools/build_reader.py   # ساخت و بررسیِ reading.html از روی فصل‌های Markdown
 LICENSE                # CC BY-SA 4.0، متنِ حقوقیِ کامل
 LICENSE-CODE           # BSD سه‌بندی (کدِ کتاب)
