@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="fa" dir="rtl"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>دفتر حدس‌ها · Python Pocket Lab</title>
+<style>
+:root{color-scheme:light;--ink:#102e32;--paper:#fffaf0;--green:#006d58;--line:#aab6aa;--gold:#ffd675;font-family:system-ui,sans-serif}
+*{box-sizing:border-box}body{margin:0;background:#eef0e5;color:var(--ink);line-height:1.65}main{max-width:52rem;margin:auto;padding:clamp(12px,3vw,32px)}header,footer,nav,.row{display:flex;align-items:center;gap:.8rem;justify-content:space-between;flex-wrap:wrap}.brand,.mono{font:700 .83rem ui-monospace,monospace;letter-spacing:.05em}.brand{direction:ltr;display:inline-flex;gap:.55rem;align-items:center}.mark{display:inline-grid;place-items:center;background:var(--ink);color:var(--gold);border-radius:.45rem;width:2rem;height:2rem;font-size:1.2rem}h1{font-size:clamp(2rem,6vw,3.7rem);line-height:1.18;margin:1.5rem 0 .5rem}h2{font-size:clamp(1.25rem,3vw,1.8rem);line-height:1.5;margin:.7rem 0}p{margin:.5rem 0 1rem}.panel{background:var(--paper);border:1px solid var(--line);border-radius:1rem;padding:clamp(16px,4vw,32px);margin:1rem 0}.topic{font-weight:700;color:var(--green)}pre{background:var(--ink);color:#fcf7df;direction:ltr;text-align:left;padding:1.2rem;border-radius:.55rem;overflow-x:auto;line-height:1.6;font-size:clamp(.86rem,2vw,1rem);tab-size:4}button,a{font:inherit}a{color:#005c55;text-underline-offset:.18em}button{border:1px solid var(--ink);color:var(--ink);background:var(--paper);border-radius:.55rem;min-height:44px;padding:.4rem .85rem;cursor:pointer}button:focus-visible,a:focus-visible{outline:3px solid #a85100;outline-offset:3px}.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.65rem}.choices button{font:700 1rem ui-monospace,monospace;direction:ltr}.choices button:disabled{opacity:1;cursor:default}.choices .right{border:2px solid var(--green);background:#d8f1e2}.choices .wrong{border:2px dashed #a33b21;background:#fff0dc}#feedback:not(:empty){margin-top:1rem;border-inline-start:4px solid var(--green);padding-inline-start:.7rem}#next{background:var(--ink);color:white}#navmap{display:flex;flex-wrap:wrap;gap:.35rem}#navmap button{min-width:44px;padding:.3rem}#navmap [aria-current]{background:var(--gold);font-weight:bold}.rule{margin:.9rem 0;border:0;border-top:1px solid var(--line)}footer{font-size:.86rem;margin-top:1.1rem}footer p{margin:0}progress{width:100%;height:.6rem;accent-color:var(--green)}[hidden]{display:none!important}#end ul{padding-inline-start:1.5rem}#end li{margin:.5rem 0}button:disabled:not(.right):not(.wrong){cursor:default}small{font-size:.85rem}@media(max-width:420px){.choices{grid-template-columns:1fr}main{padding:12px}}
+</style>
+<main>
+<header><div class="brand"><span class="mark">{ }</span> PYTHON POCKET LAB</div><button id="lang" type="button"></button></header>
+<h1 id="title"></h1><p id="intro"></p>
+<noscript>این نسخه به جاوااسکریپت نیاز دارد. <a href="https://github.com/MohammadaliMasjedi-source/a-byte-of-python-fa/blob/main/labs/PLAY.md">بازی متنی / Play without JavaScript</a></noscript>
+<section class="panel" id="play">
+<div class="row"><span class="topic" id="topic"></span><span id="meter"></span></div><progress id="bar" max="12" value="0"></progress>
+<h2 id="question" tabindex="-1"></h2><pre><code id="code"></code></pre><p id="pick"></p><div class="choices" id="choices"></div>
+<div id="feedback" role="status" aria-live="polite"></div><hr class="rule">
+<nav><a id="share"></a><a id="ref" target="_blank" rel="noreferrer"></a><button id="next"></button></nav>
+</section>
+<section class="panel" id="end" hidden><h2 id="result" tabindex="-1"></h2><p id="recap"></p><ul id="misses"></ul><button id="again"></button></section>
+<p id="maplabel"></p><div id="navmap"></div>
+<footer><p id="privacy"></p><a id="project" href="https://github.com/MohammadaliMasjedi-source/a-byte-of-python-fa"></a></footer>
+</main>
+<script type="application/json" id="bank">__CARDS__</script>
+<script>
+'use strict';
+const cards=JSON.parse(document.getElementById('bank').textContent), $=id=>document.getElementById(id);
+const faen=(fa,en)=>lang==='fa'?fa:en, tr=pair=>pair[lang==='fa'?0:1], fmt=n=>n.toLocaleString(lang==='fa'?'fa-IR':'en');
+let saved={};try{saved=JSON.parse(localStorage.getItem('pocket-lab-1')||'{}')||{}}catch{}
+let lang=saved.lang==='en'?'en':'fa', answers=Object.create(null), current=0, summary=false;
+for(const c of cards)if(saved.answers && [0,1].includes(saved.answers[c.id]))answers[c.id]=saved.answers[c.id];
+function save(){try{localStorage.setItem('pocket-lab-1',JSON.stringify({lang,answers}))}catch{}}
+function text(id,value){$(id).textContent=value}
+function route(){const slug=location.hash.slice(1);current=Math.max(0,cards.findIndex(c=>c.id===slug));summary=slug==='result'&&Object.keys(answers).length===cards.length;draw()}
+function go(slug){if(location.hash==='#'+slug)route();else location.hash=slug}
+function btn(label,fn){const b=document.createElement('button');b.type='button';b.textContent=label;b.onclick=fn;return b}
+function draw(){
+ const c=cards[current],a=answers[c.id],done=Object.keys(answers).length,score=cards.filter(q=>answers[q.id]===q.answer).length;
+ document.documentElement.lang=lang;document.documentElement.dir=lang==='fa'?'rtl':'ltr';
+ text('lang',faen('English','فارسی'));$('lang').lang=lang==='fa'?'en':'fa';
+ text('title',faen('دفتر حدس‌های پایتونی','The Python prediction notebook'));
+ text('intro',faen('پیش از اجرای کد، خروجی را حدس بزن. هر سؤال یک امتیاز دارد؛ فقط حدس اول حساب می‌شود.','Read the code before you run it. Each puzzle is worth one point; only your first guess counts.'));
+ text('topic',tr(c.topic));text('meter',faen('پاسخ‌داده: ','Answered: ')+fmt(done)+' / '+fmt(cards.length));
+ $('bar').max=cards.length;$('bar').value=done;$('bar').setAttribute('aria-label',$('meter').textContent);
+ text('question',fmt(current+1)+'. '+tr(c.title));text('code',c.code);text('pick',faen('چه چیزی چاپ می‌شود؟','What gets printed?'));
+ $('choices').replaceChildren(...c.options.map((v,i)=>{const b=btn(v,()=>{if(answers[c.id]!==undefined)return;answers[c.id]=i;save();draw();$('next').focus()});if(a!==undefined){b.disabled=true;if(i===c.answer)b.className='right';else if(i===a)b.className='wrong'}return b}));
+ text('feedback',a===undefined?'':(a===c.answer?faen('درست گفتی. ','Correct. '):faen('پاسخ درست: ','Correct output: ')+(c.options[c.answer])+' — ')+tr(c.why));
+ $('share').href='https://github.com/MohammadaliMasjedi-source/a-byte-of-python-fa/blob/main/labs/'+(lang==='en'?'PLAY.en.md':current<8?'PLAY.md':'ENCORE.fa.md')+'#'+c.id; text('share',faen('لینک عمومی همین سؤال','Public link to this puzzle')); $('ref').href=c.ref;text('ref',faen('مرجع پایتون ↗','Python reference ↗'));
+ text('next',done===cards.length?faen('دیدن نتیجه','See results'):a===undefined?faen('فعلاً رد شو','Skip for now'):faen('سؤال بعدی','Next puzzle'));
+ $('next').onclick=()=>{if(done===cards.length)return go('result');const next=Array.from({length:cards.length},(_,i)=>cards[(current+1+i)%cards.length]).find(q=>answers[q.id]===undefined);go(next.id)};
+ text('maplabel',faen('رفتن به سؤال · علامت ✓ یعنی پاسخ ثبت شده است.','Jump to a puzzle · ✓ means answered.'));
+ $('navmap').replaceChildren(...cards.map((q,i)=>{const b=btn(fmt(i+1)+(answers[q.id]!==undefined?' ✓':''),()=>go(q.id));b.setAttribute('aria-label',tr(q.title)+(answers[q.id]!==undefined?faen('، پاسخ داده شده',', answered'):''));if(!summary&&current===i)b.setAttribute('aria-current','step');return b}));
+ text('privacy',faen('بدون حساب و رهگیری؛ پیشرفت فقط در همین مرورگر ذخیره می‌شود، اگر اجازه بدهد.','No account or tracking. Progress stays in this browser when local storage is available.'));
+ text('project',faen('کتاب، مشارکت و مجوزها ↗','Book, contributions & licenses ↗'));
+ $('play').hidden=summary;$('end').hidden=!summary;
+ if(summary){text('result',faen('نتیجهٔ تو: ','Your result: ')+fmt(score)+' / '+fmt(cards.length));
+ text('recap',score===cards.length?faen('همه درست! حالا یکی از کدها را طوری تغییر بده که جواب دیگر درست شود.','A clean run! Change one snippet so the other answer becomes correct.'):faen('این سؤال‌ها ارزش یک نگاه دوباره دارند:','These puzzles are worth another look:'));
+ $('misses').replaceChildren(...cards.filter(q=>answers[q.id]!==q.answer).map(q=>{const li=document.createElement('li'),a=document.createElement('a');a.href='#'+q.id;a.textContent=tr(q.title);li.append(a);return li}));
+ text('again',faen('شروع یک دور تازه','Start a fresh round'))}
+}
+$('lang').onclick=()=>{lang=lang==='fa'?'en':'fa';save();draw()};
+$('again').onclick=()=>{answers=Object.create(null);save();go(cards[0].id)};
+window.addEventListener('hashchange',()=>{route();$(summary?'result':'question').focus()});route();
+</script>
+</html>
